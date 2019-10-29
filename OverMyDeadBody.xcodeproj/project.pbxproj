@@ -14,6 +14,9 @@
 		4CE926742367AF71003E73AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CE926722367AF71003E73AF /* LaunchScreen.storyboard */; };
 		4CE9267F2367AF71003E73AF /* OverMyDeadBodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE9267E2367AF71003E73AF /* OverMyDeadBodyTests.swift */; };
 		4CE9268A2367AF71003E73AF /* OverMyDeadBodyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE926892367AF71003E73AF /* OverMyDeadBodyUITests.swift */; };
+		4CE9269A2367B52D003E73AF /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE926992367B52D003E73AF /* ViewExtension.swift */; };
+		4CE9269C2367B560003E73AF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE9269B2367B560003E73AF /* Colors.swift */; };
+		4CE9269F2367BA1B003E73AF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE9269E2367BA1B003E73AF /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		4CE926852367AF71003E73AF /* OverMyDeadBodyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OverMyDeadBodyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CE926892367AF71003E73AF /* OverMyDeadBodyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverMyDeadBodyUITests.swift; sourceTree = "<group>"; };
 		4CE9268B2367AF71003E73AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CE926992367B52D003E73AF /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		4CE9269B2367B560003E73AF /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		4CE9269E2367BA1B003E73AF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,7 @@
 		4CE9265D2367AF6F003E73AF = {
 			isa = PBXGroup;
 			children = (
+				4CE926972367B511003E73AF /* Source */,
 				4CE926682367AF70003E73AF /* OverMyDeadBody */,
 				4CE9267D2367AF71003E73AF /* OverMyDeadBodyTests */,
 				4CE926882367AF71003E73AF /* OverMyDeadBodyUITests */,
@@ -98,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				4CE926692367AF70003E73AF /* AppDelegate.swift */,
-				4CE9266B2367AF70003E73AF /* ViewController.swift */,
 				4CE9266D2367AF70003E73AF /* Main.storyboard */,
 				4CE926702367AF71003E73AF /* Assets.xcassets */,
 				4CE926722367AF71003E73AF /* LaunchScreen.storyboard */,
@@ -123,6 +129,33 @@
 				4CE9268B2367AF71003E73AF /* Info.plist */,
 			);
 			path = OverMyDeadBodyUITests;
+			sourceTree = "<group>";
+		};
+		4CE926972367B511003E73AF /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				4CE9269D2367B9EB003E73AF /* View Controllers */,
+				4CE926982367B519003E73AF /* Helpsrs */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		4CE926982367B519003E73AF /* Helpsrs */ = {
+			isa = PBXGroup;
+			children = (
+				4CE926992367B52D003E73AF /* ViewExtension.swift */,
+				4CE9269B2367B560003E73AF /* Colors.swift */,
+			);
+			path = Helpsrs;
+			sourceTree = "<group>";
+		};
+		4CE9269D2367B9EB003E73AF /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4CE9266B2367AF70003E73AF /* ViewController.swift */,
+				4CE9269E2367BA1B003E73AF /* HomeViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +289,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CE9269F2367BA1B003E73AF /* HomeViewController.swift in Sources */,
+				4CE9269A2367B52D003E73AF /* ViewExtension.swift in Sources */,
+				4CE9269C2367B560003E73AF /* Colors.swift in Sources */,
 				4CE9266C2367AF70003E73AF /* ViewController.swift in Sources */,
 				4CE9266A2367AF70003E73AF /* AppDelegate.swift in Sources */,
 			);
