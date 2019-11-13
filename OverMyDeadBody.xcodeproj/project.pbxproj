@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C0BD5A1237BA4EC00B8E678 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0BD5A0237BA4EC00B8E678 /* ContactsViewController.swift */; };
+		4C0BD5A3237BADD500B8E678 /* NewContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0BD5A2237BADD500B8E678 /* NewContactViewController.swift */; };
+		4C0BD5A5237BB0D200B8E678 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0BD5A4237BB0D200B8E678 /* NotesViewModel.swift */; };
+		4C2051842373A267002A8D8A /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2051832373A267002A8D8A /* NoteViewController.swift */; };
+		4C5F12F5236E6E1A003012A2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F12F4236E6E1A003012A2 /* SettingsViewController.swift */; };
+		4C5F12F7236E7502003012A2 /* ControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F12F6236E7502003012A2 /* ControlViewController.swift */; };
+		4CD83E0A236F24A000340F6E /* NotePreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD83E09236F24A000340F6E /* NotePreviewTableViewCell.swift */; };
+		4CD83E0E236F2D6C00340F6E /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD83E0D236F2D6C00340F6E /* Notes.swift */; };
 		4CE9266A2367AF70003E73AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE926692367AF70003E73AF /* AppDelegate.swift */; };
 		4CE9266C2367AF70003E73AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE9266B2367AF70003E73AF /* ViewController.swift */; };
 		4CE9266F2367AF70003E73AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CE9266D2367AF70003E73AF /* Main.storyboard */; };
@@ -37,6 +45,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C0BD5A0237BA4EC00B8E678 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		4C0BD5A2237BADD500B8E678 /* NewContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewContactViewController.swift; sourceTree = "<group>"; };
+		4C0BD5A4237BB0D200B8E678 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
+		4C2051832373A267002A8D8A /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		4C5F12F4236E6E1A003012A2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		4C5F12F6236E7502003012A2 /* ControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewController.swift; sourceTree = "<group>"; };
+		4CD83E09236F24A000340F6E /* NotePreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewTableViewCell.swift; sourceTree = "<group>"; };
+		4CD83E0D236F2D6C00340F6E /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		4CE926662367AF70003E73AF /* OverMyDeadBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OverMyDeadBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CE926692367AF70003E73AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CE9266B2367AF70003E73AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +96,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CD83E0B236F24BA00340F6E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4CD83E09236F24A000340F6E /* NotePreviewTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4CD83E0C236F2D5200340F6E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4CD83E0D236F2D6C00340F6E /* Notes.swift */,
+				4C0BD5A4237BB0D200B8E678 /* NotesViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4CE9265D2367AF6F003E73AF = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +167,8 @@
 		4CE926972367B511003E73AF /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				4CD83E0C236F2D5200340F6E /* Model */,
+				4CD83E0B236F24BA00340F6E /* View */,
 				4CE9269D2367B9EB003E73AF /* View Controllers */,
 				4CE926982367B519003E73AF /* Helpsrs */,
 			);
@@ -143,6 +178,7 @@
 		4CE926982367B519003E73AF /* Helpsrs */ = {
 			isa = PBXGroup;
 			children = (
+				4C5F12F6236E7502003012A2 /* ControlViewController.swift */,
 				4CE926992367B52D003E73AF /* ViewExtension.swift */,
 				4CE9269B2367B560003E73AF /* Colors.swift */,
 			);
@@ -153,7 +189,11 @@
 			isa = PBXGroup;
 			children = (
 				4CE9266B2367AF70003E73AF /* ViewController.swift */,
+				4C5F12F4236E6E1A003012A2 /* SettingsViewController.swift */,
 				4CE9269E2367BA1B003E73AF /* HomeViewController.swift */,
+				4C2051832373A267002A8D8A /* NoteViewController.swift */,
+				4C0BD5A0237BA4EC00B8E678 /* ContactsViewController.swift */,
+				4C0BD5A2237BADD500B8E678 /* NewContactViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -290,10 +330,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CE9269F2367BA1B003E73AF /* HomeViewController.swift in Sources */,
+				4C0BD5A1237BA4EC00B8E678 /* ContactsViewController.swift in Sources */,
 				4CE9269A2367B52D003E73AF /* ViewExtension.swift in Sources */,
+				4C0BD5A5237BB0D200B8E678 /* NotesViewModel.swift in Sources */,
 				4CE9269C2367B560003E73AF /* Colors.swift in Sources */,
 				4CE9266C2367AF70003E73AF /* ViewController.swift in Sources */,
+				4CD83E0A236F24A000340F6E /* NotePreviewTableViewCell.swift in Sources */,
+				4CD83E0E236F2D6C00340F6E /* Notes.swift in Sources */,
 				4CE9266A2367AF70003E73AF /* AppDelegate.swift in Sources */,
+				4C5F12F5236E6E1A003012A2 /* SettingsViewController.swift in Sources */,
+				4C2051842373A267002A8D8A /* NoteViewController.swift in Sources */,
+				4C0BD5A3237BADD500B8E678 /* NewContactViewController.swift in Sources */,
+				4C5F12F7236E7502003012A2 /* ControlViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

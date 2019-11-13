@@ -42,6 +42,9 @@ class ViewController: UIViewController {
                 firstNameLabel.isHidden = false
                 lastNameLabel.isHidden = false
                 emailLabel.isHidden = false
+                
+                registerLoginButton.setTitle("Register", for: .normal)
+                switchViewButton.setTitle("Switch to Login", for: .normal)
             } else {
                 firstNameTextfield.isHidden = true
                 lastNameTextField.isHidden = true
@@ -49,6 +52,9 @@ class ViewController: UIViewController {
                 firstNameLabel.isHidden = true
                 lastNameLabel.isHidden = true
                 emailLabel.isHidden = true
+                
+                registerLoginButton.setTitle("Login", for: .normal)
+                switchViewButton.setTitle("Switch to Register", for: .normal)
             }
         }
     }
@@ -68,11 +74,15 @@ class ViewController: UIViewController {
     }
 
     @IBAction func registerOrLoginButtonClicked(_ sender: Any) {
+        print("login")
+    }
+    
+    @IBAction func unwindToLoginPage(segue: UIStoryboardSegue) {
+        print("logout")
     }
     
     @IBAction func switchViewButtonClicked(_ sender: Any) {
         isRegisteringView = !isRegisteringView
     }
-    
 }
 
