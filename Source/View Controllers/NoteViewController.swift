@@ -16,24 +16,31 @@ class NoteViewController: UIViewController {
     @IBOutlet weak var noteContentTextView: UITextView!
     
     let recipientButtonTemplate: String = " Recipients: Add More"
-    var noteModel: NoteViewModel? 
+    var noteModel: NoteViewModel?
+    var contactsToBeAdded: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateTopBarView()
         self.updateRecipientsButton()
         self.noteContentTextView.text = ""
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.prepopulateContent()
     }
     
     private func prepopulateContent() {
-        guard let model = noteModel, !model.isTemplate else {
+        guard var model = noteModel, !model.isTemplate else {
             return
         }
         
+        model.recipients.append(contentsOf: contactsToBeAdded.filter { !model.recipients.contains($0) })
         self.noteTitleTextField.text = model.subject
         self.noteContentTextView.text = model.body
         self.addMoreRecipientsButton.setTitle("\(model.recipients.count)\(recipientButtonTemplate)", for: .normal)
+        self.noteModel = model
     }
     
     private func updateRecipientsButton() {
@@ -57,7 +64,24 @@ class NoteViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    var tempStorage: NoteViewModel = NoteViewModel(subject: "", body: "", recipients: [], isTemplate: false, index: 0)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        self.tempStorage.subject = noteTitleTextField.text ?? ""
+        self.tempStorage.body = noteContentTextView.text
+    }
+    
     @IBAction func unwindToNoteView(segue: UIStoryboardSegue) {
+        guard segue.identifier  == "saveIdentifier", let viewController = segue.source as? ContactsViewController else {
+            return
+        }
         
+        self.contactsToBeAdded = viewController.isContactSelected.filter { $0.value == true }.map { (key: ContactViewModel, value: Bool) in
+            return key.email
+        }
+        
+        self.noteModel?.isTemplate = false
+        self.noteModel?.body = tempStorage.body
+        self.noteModel?.subject = tempStorage.subject
+        prepopulateContent()
     }
 }

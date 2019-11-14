@@ -27,7 +27,6 @@ class NotePreviewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         customBackgroundView.layer.borderWidth = 1
         customBackgroundView.layer.cornerRadius = 8
     }

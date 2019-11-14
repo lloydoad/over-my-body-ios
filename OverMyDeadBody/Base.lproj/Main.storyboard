@@ -518,7 +518,7 @@
                                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="bGj-b0-T3U" kind="unwind" unwindAction="unwindToNoteViewWithSegue:" id="X4n-5v-XKK"/>
+                                                    <segue destination="bGj-b0-T3U" kind="unwind" identifier="cancelIdentifier" unwindAction="unwindToNoteViewWithSegue:" id="X4n-5v-XKK"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjI-hM-dDk">
@@ -533,6 +533,9 @@
                                                 <state key="normal" title="Save">
                                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="bGj-b0-T3U" kind="unwind" identifier="saveIdentifier" unwindAction="unwindToNoteViewWithSegue:" id="q4A-t9-mlo"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -560,9 +563,61 @@
                                             <segue destination="waK-Vv-fzt" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="GPy-IA-692"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O7Y-H2-Ght" userLabel="Contacts Table View">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O7Y-H2-Ght" userLabel="Contacts Table View">
                                         <rect key="frame" x="16" y="142" width="382" height="600"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactCellIdentifier" rowHeight="58" id="Qxm-4M-YNA" customClass="ContactsTableViewCell" customModule="OverMyDeadBody" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="382" height="58"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qxm-4M-YNA" id="uoa-JC-wXu">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="58"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Nl-x9-95v" userLabel="Custom Background View">
+                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="53"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="FD2-zm-Xew">
+                                                                    <rect key="frame" x="5" y="5" width="372" height="43"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Smith" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujz-Mp-dpB">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="372" height="21.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="555-555-5555" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eE-pB-3tD">
+                                                                            <rect key="frame" x="0.0" y="21.5" width="372" height="21.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="FD2-zm-Xew" secondAttribute="trailing" constant="5" id="7Lk-Q7-zAS"/>
+                                                                <constraint firstAttribute="bottom" secondItem="FD2-zm-Xew" secondAttribute="bottom" constant="5" id="8f1-1b-QVR"/>
+                                                                <constraint firstItem="FD2-zm-Xew" firstAttribute="leading" secondItem="4Nl-x9-95v" secondAttribute="leading" constant="5" id="pzM-Eh-ioj"/>
+                                                                <constraint firstItem="FD2-zm-Xew" firstAttribute="top" secondItem="4Nl-x9-95v" secondAttribute="top" constant="5" id="skq-Ll-f5b"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="4Nl-x9-95v" firstAttribute="top" secondItem="uoa-JC-wXu" secondAttribute="top" id="LYd-vu-74S"/>
+                                                        <constraint firstAttribute="bottom" secondItem="4Nl-x9-95v" secondAttribute="bottom" constant="5" id="Vmb-5q-g3N"/>
+                                                        <constraint firstItem="4Nl-x9-95v" firstAttribute="leading" secondItem="uoa-JC-wXu" secondAttribute="leading" id="b9N-Nj-lxJ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="4Nl-x9-95v" secondAttribute="trailing" id="eYn-Ti-2jF"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="customBackgroundView" destination="4Nl-x9-95v" id="XeO-mu-hA7"/>
+                                                    <outlet property="emailLabel" destination="9eE-pB-3tD" id="hzt-d6-N3J"/>
+                                                    <outlet property="nameLabel" destination="ujz-Mp-dpB" id="Msa-N2-jyf"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
                                     </tableView>
                                     <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Search contacts" translatesAutoresizingMaskIntoConstraints="NO" id="1NL-06-mfz">
                                         <rect key="frame" x="8" y="85" width="398" height="56"/>
@@ -606,6 +661,7 @@
                     </view>
                     <connections>
                         <outlet property="addNewEmailButton" destination="GZr-uj-js8" id="fPn-40-OEW"/>
+                        <outlet property="contactsSearchBar" destination="1NL-06-mfz" id="SDm-hX-CTi"/>
                         <outlet property="contactsTableView" destination="O7Y-H2-Ght" id="h6h-st-a4t"/>
                         <outlet property="topBarView" destination="HwD-co-cNN" id="mdj-ga-Y4x"/>
                     </connections>
