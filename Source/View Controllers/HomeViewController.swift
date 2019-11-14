@@ -78,7 +78,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.notes[newData.index] = newData
         }
         
-        print("heyo")
+        print("change")
         self.previewNotesTableView.reloadData()
     }
 }
