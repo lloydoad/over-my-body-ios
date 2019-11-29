@@ -13,42 +13,48 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var notesTabBarItem: UITabBarItem!
     @IBOutlet weak var previewNotesTableView: UITableView!
     
-    private var notes: [NoteViewModel] = []
+    public var viewModels: [NoteViewModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        previewNotesTableView.delegate = self
-        previewNotesTableView.dataSource = self
+        self.previewNotesTableView.delegate = self
+        self.previewNotesTableView.dataSource = self
         
-        var data: [Note] = []
-        data.append(Note(subject: "Create New Note", body: "", recipients: []))
-        data.append(contentsOf: dummyData)
-        notes = data.enumerated().map {
-            NoteViewModel(
-                subject: $0.element.subject,
-                body: $0.element.body,
-                recipients: $0.element.recipients,
-                isTemplate: $0.offset == 0,
-                index: $0.offset
-            )
-        }
+        var templateNote = NoteViewModel(model: NoteModel(
+            _id: "",
+            subject: "Create new note",
+            recipients: [],
+            body: ""
+        ))
+        templateNote.isTemplate = true
+        
+        self.viewModels.insert(templateNote, at: 0)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.previewNotesTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notes.count
+        return viewModels.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NoteViewControllerIdentifier") as? NoteViewController else {
+        guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: NoteViewController.identifier) as? NoteViewController else {
             return
         }
         
-        guard indexPath.row < self.notes.count else {
+        guard indexPath.row < self.viewModels.count else {
             return
         }
         
-        viewController.noteModel = notes[indexPath.row]
+        let model = self.viewModels[indexPath.row]
+        
+        viewController.viewModelIndex = model.isTemplate ? nil : indexPath.row
+        viewController.homeViewController = self
+        viewController.viewModel = model
+        
         viewController.modalPresentationStyle = .overCurrentContext
         self.present(viewController, animated: true, completion: nil)
     }
@@ -58,27 +64,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return UITableViewCell()
         }
         
-        let note = notes[indexPath.row]
+        let note = self.viewModels[indexPath.row]
         cell.model = note
         return cell
-    }
-    
-    @IBAction func unwindFromSave(segue: UIStoryboardSegue) {
-
-        guard let viewController = segue.source as? NoteViewController, var newData = viewController.noteModel else {
-            return
-        }
-        
-        if newData.index == 0 {
-            newData.index = self.notes.count
-            newData.body = viewController.noteContentTextView.text
-            self.notes.append(newData)
-        } else if newData.index < self.notes.count {
-            newData.body = viewController.noteContentTextView.text
-            self.notes[newData.index] = newData
-        }
-        
-        print("change")
-        self.previewNotesTableView.reloadData()
     }
 }

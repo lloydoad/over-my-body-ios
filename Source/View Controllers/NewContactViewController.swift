@@ -10,13 +10,8 @@ import UIKit
 
 class NewContactViewController: UIViewController {
     
-    @IBOutlet weak var firstNameTextField: UITextField!
-    @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var mailTextField: UITextField!
-    
     @IBOutlet weak var topBarView: UIView!
-    
-    var contact: ContactViewModel = ContactViewModel(firstName: "", lastName: "", email: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +31,7 @@ class NewContactViewController: UIViewController {
             return true
         }
         
-        guard let firstName = firstNameTextField.text, let lastName = lastNameTextField.text, let mail = mailTextField.text else {
-            return false
-        }
-        
-        guard !firstName.isEmpty || !lastName.isEmpty else {
-            if firstName.isEmpty {
-                addWarningTo(firstNameTextField)
-            } else {
-                addWarningTo(lastNameTextField)
-            }
+        guard let mail = mailTextField.text else {
             return false
         }
         
@@ -54,7 +40,6 @@ class NewContactViewController: UIViewController {
             return false
         }
         
-        self.contact = ContactViewModel(firstName: firstName, lastName: lastName, email: mail)
         return true
     }
     
@@ -64,8 +49,6 @@ class NewContactViewController: UIViewController {
     }
     
     private func removeWarnings() {
-        firstNameTextField.layer.borderColor = UIColor.clear.cgColor
-        lastNameTextField.layer.borderColor = UIColor.clear.cgColor
         mailTextField.layer.borderColor = UIColor.clear.cgColor
     }
 }

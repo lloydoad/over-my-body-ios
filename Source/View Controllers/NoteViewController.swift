@@ -15,9 +15,13 @@ class NoteViewController: UIViewController {
     @IBOutlet weak var noteTitleTextField: UITextField!
     @IBOutlet weak var noteContentTextView: UITextView!
     
+    public static let identifier: String = "NoteViewControllerIdentifier"
+    
     let recipientButtonTemplate: String = " Recipients: Add More"
-    var noteModel: NoteViewModel?
-    var contactsToBeAdded: [String] = []
+    
+    var homeViewController: HomeViewController!
+    var viewModel: NoteViewModel!
+    var viewModelIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,15 +36,17 @@ class NoteViewController: UIViewController {
     }
     
     private func prepopulateContent() {
-        guard var model = noteModel, !model.isTemplate else {
+        guard !viewModel.isTemplate else {
             return
         }
         
-        model.recipients.append(contentsOf: contactsToBeAdded.filter { !model.recipients.contains($0) })
-        self.noteTitleTextField.text = model.subject
-        self.noteContentTextView.text = model.body
-        self.addMoreRecipientsButton.setTitle("\(model.recipients.count)\(recipientButtonTemplate)", for: .normal)
-        self.noteModel = model
+        self.noteContentTextView.text = viewModel.body
+        self.noteTitleTextField.text = viewModel.subject
+        self.updateRecipientButtonText()
+    }
+    
+    internal func updateRecipientButtonText() {
+        self.addMoreRecipientsButton.setTitle("\(viewModel.recipients.count)\(recipientButtonTemplate)", for: .normal)
     }
     
     private func updateRecipientsButton() {
@@ -57,31 +63,66 @@ class NoteViewController: UIViewController {
     }
     
     @IBAction func titleTextDidChange(_ sender: Any) {
-        self.noteModel?.subject = noteTitleTextField.text ?? ""
+        if let subject = noteTitleTextField.text {
+            self.viewModel.subject = subject
+        }
+    }
+    
+    @IBAction func addNewContactTapped(_ sender: Any) {
+        guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: ContactsViewController.identifier) as? ContactsViewController else {
+            return
+        }
+        
+        viewController.viewModel = viewModel
+        viewController.noteViewController = self
+        viewController.modalPresentationStyle = .overCurrentContext
+        self.present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    var tempStorage: NoteViewModel = NoteViewModel(subject: "", body: "", recipients: [], isTemplate: false, index: 0)
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        self.tempStorage.subject = noteTitleTextField.text ?? ""
-        self.tempStorage.body = noteContentTextView.text
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        self.viewModel.body = self.noteContentTextView.text
+        self.viewModel.isTemplate = false
+        
+        if let index = self.viewModelIndex {
+            self.updateNote(note: self.viewModel, with: index)
+        } else {
+            self.addNewNote(note: self.viewModel)
+        }
     }
     
-    @IBAction func unwindToNoteView(segue: UIStoryboardSegue) {
-        guard segue.identifier  == "saveIdentifier", let viewController = segue.source as? ContactsViewController else {
-            return
+    private func updateNote(note: NoteViewModel, with index: Int) {
+        RequestSingleton.saveNote(note: note) { (model) in
+            guard let noteViewModel = model else {
+                return
+            }
+            
+            guard self.homeViewController != nil else {
+                return
+            }
+            
+            self.homeViewController.viewModels[index] = noteViewModel
+            self.homeViewController.previewNotesTableView.reloadData()
+            self.dismiss(animated: true, completion: nil)
         }
-        
-        self.contactsToBeAdded = viewController.isContactSelected.filter { $0.value == true }.map { (key: ContactViewModel, value: Bool) in
-            return key.email
+    }
+    
+    private func addNewNote(note: NoteViewModel) {
+        RequestSingleton.createNote(note: note) { (model) in
+            guard let noteViewModel = model else {
+                return
+            }
+            
+            guard self.homeViewController != nil else {
+                return
+            }
+            
+            self.homeViewController.viewModels.append(noteViewModel)
+            self.homeViewController.previewNotesTableView.reloadData()
+            self.dismiss(animated: true, completion: nil)
         }
-        
-        self.noteModel?.isTemplate = false
-        self.noteModel?.body = tempStorage.body
-        self.noteModel?.subject = tempStorage.subject
-        prepopulateContent()
     }
 }

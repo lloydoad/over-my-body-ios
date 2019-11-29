@@ -12,7 +12,6 @@ class ContactsTableViewCell: UITableViewCell {
     
     static let identifier: String = "ContactCellIdentifier"
     
-    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var customBackgroundView: UIView!
     
@@ -26,14 +25,12 @@ class ContactsTableViewCell: UITableViewCell {
         }
     }
     
-    var viewModel: ContactViewModel? {
+    var email: String? {
         didSet {
-            guard let model = self.viewModel else {
+            guard let email = self.email else {
                 return
             }
-            
-            nameLabel.text = "\(model.firstName) \(model.lastName)"
-            emailLabel.text = model.email
+            emailLabel.text = email
         }
     }
     

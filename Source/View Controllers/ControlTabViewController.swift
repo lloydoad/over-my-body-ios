@@ -9,9 +9,11 @@
 import UIKit
 
 class ControlTabViewController: UITabBarController {
+    
+    public static let identifier: String = "ControlTabViewController"
 
     @IBOutlet weak var mainTabBar: UITabBar!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         

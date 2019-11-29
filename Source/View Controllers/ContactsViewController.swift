@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Contacts
 
 class ContactsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -16,9 +15,14 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var addNewEmailButton: UIButton!
     @IBOutlet weak var contactsSearchBar: UISearchBar!
     
-    var viewModel: [ContactViewModel] = []
-    var displayedViewModel: [ContactViewModel] = []
-    var isContactSelected: [ContactViewModel:Bool] = [:]
+    public static let identifier: String = "ContactsViewController"
+    
+    var viewModel: NoteViewModel!
+    weak var noteViewController: NoteViewController?
+    
+    var allEmails: [String] = []
+    var displayedEmails: [String] = []
+    var isEmailSelected: [String:Bool] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +31,10 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
         self.setupTableView()
         self.fetchContacts()
         self.setupSearchBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.contactsTableView.reloadData()
     }
     
     private func setupSearchBar() {
@@ -39,35 +47,22 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func fetchContacts() {
-        let store = CNContactStore()
-        store.requestAccess(for: .contacts) { (accessGranted, error) in
-            if let err = error {
-                print(err)
-                return
+        Contacts.getContacts { (emails) in
+            DispatchQueue.main.async {
+                var allEmails = emails
+                self.viewModel.recipients.forEach({ (viewModelEmail) in
+                    if !allEmails.contains(viewModelEmail) {
+                        allEmails.append(viewModelEmail)
+                    }
+                    
+                    self.isEmailSelected[viewModelEmail] = true
+                })
+                
+                allEmails.sort()
+                self.allEmails = allEmails
+                self.displayedEmails = allEmails
+                self.contactsTableView.reloadData()
             }
-            
-            guard accessGranted else {
-                print("Access Denied")
-                return
-            }
-            
-            var tempViewModel: [ContactViewModel] = []
-            let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactEmailAddressesKey]
-            let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor] )
-            try? store.enumerateContacts(with: request, usingBlock: { (contact, stopPointer) in
-                if let email = contact.emailAddresses.first?.value as String? {
-                    tempViewModel.append(ContactViewModel(
-                        firstName: contact.givenName,
-                        lastName: contact.familyName,
-                        email: email)
-                    )
-                }
-            })
-            
-            self.viewModel = tempViewModel
-            self.viewModel.sort()
-            self.displayedViewModel = self.viewModel
-            self.contactsTableView.reloadData()
         }
     }
     
@@ -87,32 +82,32 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - Table view
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return displayedViewModel.count
+        return self.displayedEmails.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
-        guard row < self.displayedViewModel.count else {
+        guard row < self.displayedEmails.count else {
             return
         }
         
-        let selectedContact = self.displayedViewModel[row]
-        if isContactSelected[selectedContact] == nil {
-            isContactSelected[selectedContact] = true
+        let selectedEmail = self.displayedEmails[row]
+        if isEmailSelected[selectedEmail] == nil {
+            isEmailSelected[selectedEmail] = true
         } else {
-            isContactSelected[selectedContact] = !(isContactSelected[selectedContact] ?? true)
+            isEmailSelected[selectedEmail] = !(isEmailSelected[selectedEmail] ?? true)
         }
         
         self.contactsTableView.reloadRows(at: [indexPath], with: .fade)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = contactsTableView.dequeueReusableCell(withIdentifier: ContactsTableViewCell.identifier, for: indexPath) as? ContactsTableViewCell, indexPath.row < self.viewModel.count else {
+        guard let cell = contactsTableView.dequeueReusableCell(withIdentifier: ContactsTableViewCell.identifier, for: indexPath) as? ContactsTableViewCell, indexPath.row < self.displayedEmails.count else {
             return UITableViewCell()
         }
         
-        cell.viewModel = self.displayedViewModel[indexPath.row]
-        let isSelected = self.isContactSelected[self.displayedViewModel[indexPath.row]] ?? false
+        cell.email = self.displayedEmails[indexPath.row]
+        let isSelected = self.isEmailSelected[self.displayedEmails[indexPath.row]] ?? false
         cell.shouldDisplaySelectedBackground = isSelected
         return cell
     }
@@ -124,70 +119,35 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         if query.isEmpty {
-            self.displayedViewModel = self.viewModel
+            self.displayedEmails = self.allEmails
         } else {
-            self.displayedViewModel = self.viewModel.filter {
-                $0.firstName.lowercased().contains(query) ||
-                $0.lastName.lowercased().contains(query) ||
-                $0.email.lowercased().contains(query)
+            self.displayedEmails = self.allEmails.filter {
+                $0.lowercased().contains(query)
             }
         }
         
         self.contactsTableView.reloadData()
     }
     
-    @IBAction func unwindToContactsViewController(segue: UIStoryboardSegue) {
-        guard segue.identifier  == "saveIdentifier", let viewController = segue.source as? NewContactViewController else {
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        var selectedEmails: [String] = []
+        for (key,isSelected) in self.isEmailSelected {
+            if isSelected {
+                selectedEmails.append(key)
+            }
+        }
+        
+        self.viewModel.recipients = selectedEmails
+        guard let noteViewController = self.noteViewController else {
             return
         }
         
-        let newContactData = viewController.contact
-        let store = CNContactStore()
-        store.requestAccess(for: .contacts) { (accessGranted, error) in
-            if let err = error {
-                print(err)
-                return
-            }
-
-            guard accessGranted else {
-                print("Access Denied")
-                return
-            }
-            
-            var tempViewModel: [ContactViewModel] = []
-            let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactEmailAddressesKey]
-            let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor] )
-            try? store.enumerateContacts(with: request, usingBlock: { (contact, stopPointer) in
-                if let email = contact.emailAddresses.first?.value as String? {
-                    tempViewModel.append(ContactViewModel(
-                        firstName: contact.givenName,
-                        lastName: contact.familyName,
-                        email: email)
-                    )
-                }
-            })
-            
-            let newContact = CNMutableContact()
-            newContact.givenName = newContactData.firstName
-            newContact.familyName = newContactData.lastName
-            newContact.emailAddresses = [CNLabeledValue<NSString>(label: newContactData.email, value: newContactData.email as NSString)]
-            
-            let saveRequest = CNSaveRequest()
-            saveRequest.add(newContact, toContainerWithIdentifier:nil)
-            
-            do {
-                try store.execute(saveRequest)
-                tempViewModel.append(newContactData)
-                
-                self.viewModel = tempViewModel
-                self.viewModel.sort()
-                self.displayedViewModel = self.viewModel
-                self.contactsTableView.reloadData()
-            } catch let error {
-                print(error)
-            }
-            
-            return
-        }
+        noteViewController.viewModel = self.viewModel
+        noteViewController.updateRecipientButtonText()
+        self.dismiss(animated: true, completion: nil)
     }
 }
