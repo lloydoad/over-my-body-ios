@@ -32,6 +32,9 @@
 		4CE9269A2367B52D003E73AF /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE926992367B52D003E73AF /* ViewExtension.swift */; };
 		4CE9269C2367B560003E73AF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE9269B2367B560003E73AF /* Colors.swift */; };
 		4CE9269F2367BA1B003E73AF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE9269E2367BA1B003E73AF /* HomeViewController.swift */; };
+		A2B0403892CBD823924E9DD9 /* Pods_OverMyDeadBodyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1258A9845B5C9D874C7FD551 /* Pods_OverMyDeadBodyTests.framework */; };
+		ADB46C0BA3C9EC6264EFCCE1 /* Pods_OverMyDeadBody.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25707788A9CC24E9B161EBEA /* Pods_OverMyDeadBody.framework */; };
+		C77F1C124A1A43EE207F8806 /* Pods_OverMyDeadBodyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85607DB1319F57B130ABCD38 /* Pods_OverMyDeadBodyUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0DD81E3048CB53F8BDF5CA54 /* Pods-OverMyDeadBodyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OverMyDeadBodyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OverMyDeadBodyTests/Pods-OverMyDeadBodyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0F1BF19B877A5F242DB2BA5D /* Pods-OverMyDeadBody.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OverMyDeadBody.release.xcconfig"; path = "Pods/Target Support Files/Pods-OverMyDeadBody/Pods-OverMyDeadBody.release.xcconfig"; sourceTree = "<group>"; };
+		1258A9845B5C9D874C7FD551 /* Pods_OverMyDeadBodyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OverMyDeadBodyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		238DC95262133E0EA567FC71 /* Pods-OverMyDeadBodyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OverMyDeadBodyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OverMyDeadBodyUITests/Pods-OverMyDeadBodyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		25707788A9CC24E9B161EBEA /* Pods_OverMyDeadBody.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OverMyDeadBody.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C0BD5A0237BA4EC00B8E678 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		4C0BD5A2237BADD500B8E678 /* NewContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewContactViewController.swift; sourceTree = "<group>"; };
 		4C0BD5A4237BB0D200B8E678 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
@@ -83,6 +91,10 @@
 		4CE926992367B52D003E73AF /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		4CE9269B2367B560003E73AF /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4CE9269E2367BA1B003E73AF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		85607DB1319F57B130ABCD38 /* Pods_OverMyDeadBodyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OverMyDeadBodyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B4E528B4098A61AF86FF2F6 /* Pods-OverMyDeadBodyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OverMyDeadBodyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OverMyDeadBodyTests/Pods-OverMyDeadBodyTests.release.xcconfig"; sourceTree = "<group>"; };
+		977637F3A62962798609CD8F /* Pods-OverMyDeadBodyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OverMyDeadBodyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OverMyDeadBodyUITests/Pods-OverMyDeadBodyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B4C7818CFB0A02973568A13D /* Pods-OverMyDeadBody.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OverMyDeadBody.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OverMyDeadBody/Pods-OverMyDeadBody.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADB46C0BA3C9EC6264EFCCE1 /* Pods_OverMyDeadBody.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2B0403892CBD823924E9DD9 /* Pods_OverMyDeadBodyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,12 +118,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C77F1C124A1A43EE207F8806 /* Pods_OverMyDeadBodyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B3119F9CD86B86857E049F8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				25707788A9CC24E9B161EBEA /* Pods_OverMyDeadBody.framework */,
+				1258A9845B5C9D874C7FD551 /* Pods_OverMyDeadBodyTests.framework */,
+				85607DB1319F57B130ABCD38 /* Pods_OverMyDeadBodyUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4C7A4D6D237F058F009C8D53 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +177,8 @@
 				4CE9267D2367AF71003E73AF /* OverMyDeadBodyTests */,
 				4CE926882367AF71003E73AF /* OverMyDeadBodyUITests */,
 				4CE926672367AF70003E73AF /* Products */,
+				86AF1F017D08C59657883591 /* Pods */,
+				1B3119F9CD86B86857E049F8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -235,6 +262,19 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		86AF1F017D08C59657883591 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B4C7818CFB0A02973568A13D /* Pods-OverMyDeadBody.debug.xcconfig */,
+				0F1BF19B877A5F242DB2BA5D /* Pods-OverMyDeadBody.release.xcconfig */,
+				0DD81E3048CB53F8BDF5CA54 /* Pods-OverMyDeadBodyTests.debug.xcconfig */,
+				8B4E528B4098A61AF86FF2F6 /* Pods-OverMyDeadBodyTests.release.xcconfig */,
+				977637F3A62962798609CD8F /* Pods-OverMyDeadBodyUITests.debug.xcconfig */,
+				238DC95262133E0EA567FC71 /* Pods-OverMyDeadBodyUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -242,9 +282,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CE9268E2367AF71003E73AF /* Build configuration list for PBXNativeTarget "OverMyDeadBody" */;
 			buildPhases = (
+				5A00C53C6ABAE38F10C00BC3 /* [CP] Check Pods Manifest.lock */,
 				4CE926622367AF6F003E73AF /* Sources */,
 				4CE926632367AF6F003E73AF /* Frameworks */,
 				4CE926642367AF6F003E73AF /* Resources */,
+				59B6A485FB42A59F2BC02FA6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -259,6 +301,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CE926912367AF71003E73AF /* Build configuration list for PBXNativeTarget "OverMyDeadBodyTests" */;
 			buildPhases = (
+				1F26419AF8B19AF0819C572E /* [CP] Check Pods Manifest.lock */,
 				4CE926762367AF71003E73AF /* Sources */,
 				4CE926772367AF71003E73AF /* Frameworks */,
 				4CE926782367AF71003E73AF /* Resources */,
@@ -277,6 +320,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CE926942367AF71003E73AF /* Build configuration list for PBXNativeTarget "OverMyDeadBodyUITests" */;
 			buildPhases = (
+				97C62F4E4657AFF67A408964 /* [CP] Check Pods Manifest.lock */,
 				4CE926812367AF71003E73AF /* Sources */,
 				4CE926822367AF71003E73AF /* Frameworks */,
 				4CE926832367AF71003E73AF /* Resources */,
@@ -360,6 +404,81 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F26419AF8B19AF0819C572E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OverMyDeadBodyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		59B6A485FB42A59F2BC02FA6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-OverMyDeadBody/Pods-OverMyDeadBody-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OverMyDeadBody/Pods-OverMyDeadBody-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5A00C53C6ABAE38F10C00BC3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OverMyDeadBody-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97C62F4E4657AFF67A408964 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OverMyDeadBodyUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4CE926622367AF6F003E73AF /* Sources */ = {
@@ -558,6 +677,7 @@
 		};
 		4CE9268F2367AF71003E73AF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B4C7818CFB0A02973568A13D /* Pods-OverMyDeadBody.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -576,6 +696,7 @@
 		};
 		4CE926902367AF71003E73AF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F1BF19B877A5F242DB2BA5D /* Pods-OverMyDeadBody.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -594,6 +715,7 @@
 		};
 		4CE926922367AF71003E73AF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0DD81E3048CB53F8BDF5CA54 /* Pods-OverMyDeadBodyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -615,6 +737,7 @@
 		};
 		4CE926932367AF71003E73AF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B4E528B4098A61AF86FF2F6 /* Pods-OverMyDeadBodyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -636,6 +759,7 @@
 		};
 		4CE926952367AF71003E73AF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 977637F3A62962798609CD8F /* Pods-OverMyDeadBodyUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -656,6 +780,7 @@
 		};
 		4CE926962367AF71003E73AF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 238DC95262133E0EA567FC71 /* Pods-OverMyDeadBodyUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

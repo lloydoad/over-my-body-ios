@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class AuthenticationViewController: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
     
@@ -74,6 +75,7 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate, UITe
     override func viewDidAppear(_ animated: Bool) {
         
         let applicationToken = AuthorizationToken.getAppToken()
+        SVProgressHUD.show()
         
         guard
             let _ = applicationToken.0,
@@ -84,6 +86,7 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate, UITe
                 self.authenticationOverlay.backgroundColor = .clear
             })
             self.authenticationOverlay.isHidden = true
+            SVProgressHUD.dismiss()
             return
         }
         
@@ -99,9 +102,11 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate, UITe
                 })
                 self.authenticationOverlay.isHidden = true
                 AuthorizationToken.clearAppToken()
+                SVProgressHUD.dismiss()
                 return
             }
             
+            SVProgressHUD.dismiss()
             self.segueToHomeViewController(model: viewModel)
         }
     }
@@ -150,7 +155,7 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate, UITe
     }
     
     private func setupPickers() {
-        let nextDay = Date(timeIntervalSinceNow: 60 * 60 * 24)
+        let nextDay = Date(timeIntervalSinceNow: 60 * 25)
         deadlineDatePicker.minimumDate = nextDay
     }
     
@@ -171,7 +176,8 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate, UITe
             else {
                 return
         }
-
+        
+        SVProgressHUD.show()
         let deadlineDate = self.deadlineDatePicker.date
         let requestBody = [
             RequestKeys.firstName.rawValue: firstName,
@@ -183,8 +189,10 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate, UITe
         
         RequestSingleton.registerUser(requestBody: requestBody) { (viewModel) in
             if let model = viewModel {
+                SVProgressHUD.dismiss()
                 self.segueToHomeViewController(model: model)
             }
+            SVProgressHUD.dismiss()
         }
     }
     
@@ -196,6 +204,7 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate, UITe
                 return
         }
 
+        SVProgressHUD.show()
         let requestBody = [
             RequestKeys.username.rawValue: username,
             RequestKeys.password.rawValue: password
@@ -203,8 +212,10 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate, UITe
 
         RequestSingleton.loginUser(requestBody: requestBody) { (viewModel) in
             if let model = viewModel {
+                SVProgressHUD.dismiss()
                 self.segueToHomeViewController(model: model)
             }
+            SVProgressHUD.dismiss()
         }
     }
     

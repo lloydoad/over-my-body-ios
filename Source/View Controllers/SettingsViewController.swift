@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class SettingsViewController: UIViewController {
 
@@ -41,14 +42,13 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    // dummy date
-    var currentDeadline: Date = Date(timeIntervalSinceNow: 60 * 28)
+    var currentDeadline: Date = Date(timeIntervalSinceNow: 60 * 25)
     let currentDeadlineLabelFormat: String = "Current Set Deadline: "
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
-        let next30Minutes = Date(timeIntervalSinceNow: 60 * 30)
+        let next30Minutes = Date(timeIntervalSinceNow: 60 * 25)
         self.deadlinePickerView.minimumDate = next30Minutes
     }
     
@@ -120,14 +120,18 @@ class SettingsViewController: UIViewController {
             return
         }
         
+        SVProgressHUD.show()
         RequestSingleton.comfirmLife(newDeadline: nextDeadline) { (didConfirm) in
             guard didConfirm else {
+                SVProgressHUD.showError(withStatus: nil)
+                SVProgressHUD.dismiss()
                 return
             }
             
             self.currentDeadline = nextDeadline
             self.updateSettingValues()
             DeadlineNotifications.scheduleNotificationsFor(nextDeadline)
+            SVProgressHUD.dismiss()
         }
     }
     

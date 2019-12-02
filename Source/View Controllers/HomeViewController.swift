@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -80,12 +81,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func removeNote(_ note: NoteViewModel, at indexPath: IndexPath) {
+        SVProgressHUD.show()
         RequestSingleton.deleteNote(note: note) { (didSucceed) in
             DispatchQueue.main.async {
                 guard didSucceed else {
+                    SVProgressHUD.dismiss()
                     return
                 }
                 
+                SVProgressHUD.dismiss()
                 self.viewModels.remove(at: indexPath.row)
                 self.previewNotesTableView.deleteRows(at: [indexPath], with: .fade)
             }

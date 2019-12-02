@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class NoteViewController: UIViewController {
     
@@ -95,15 +96,19 @@ class NoteViewController: UIViewController {
     }
     
     private func updateNote(note: NoteViewModel, with index: Int) {
+        SVProgressHUD.show()
         RequestSingleton.saveNote(note: note) { (model) in
             guard let noteViewModel = model else {
+                SVProgressHUD.dismiss()
                 return
             }
             
             guard self.homeViewController != nil else {
+                SVProgressHUD.dismiss()
                 return
             }
             
+            SVProgressHUD.dismiss()
             self.homeViewController.viewModels[index] = noteViewModel
             self.homeViewController.previewNotesTableView.reloadData()
             self.dismiss(animated: true, completion: nil)
@@ -111,15 +116,19 @@ class NoteViewController: UIViewController {
     }
     
     private func addNewNote(note: NoteViewModel) {
+        SVProgressHUD.show()
         RequestSingleton.createNote(note: note) { (model) in
             guard let noteViewModel = model else {
+                SVProgressHUD.dismiss()
                 return
             }
             
             guard self.homeViewController != nil else {
+                SVProgressHUD.dismiss()
                 return
             }
             
+            SVProgressHUD.dismiss()
             self.homeViewController.viewModels.append(noteViewModel)
             self.homeViewController.previewNotesTableView.reloadData()
             self.dismiss(animated: true, completion: nil)
