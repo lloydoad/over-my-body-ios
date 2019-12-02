@@ -8,15 +8,15 @@
 
 import UIKit
 
-class AuthenticationViewController: UIViewController, UIPickerViewDelegate {
+class AuthenticationViewController: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
     
     // background view
     @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var authenticationOverlay: UIView!
     
     // label outlets
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var lastNameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var deadLineLabel: UILabel!
     
     // persistent labels
@@ -26,7 +26,6 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate {
     @IBOutlet weak var usernameTextfield: UITextField!
     @IBOutlet weak var firstNameTextfield: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
     
@@ -40,10 +39,8 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate {
             if self.isRegisteringView {
                 firstNameTextfield.isHidden = false
                 lastNameTextField.isHidden = false
-                emailTextField.isHidden = false
                 firstNameLabel.isHidden = false
                 lastNameLabel.isHidden = false
-                emailLabel.isHidden = false
                 deadLineLabel.isHidden = false
                 deadlineDatePicker.isHidden = false
                 
@@ -52,10 +49,8 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate {
             } else {
                 firstNameTextfield.isHidden = true
                 lastNameTextField.isHidden = true
-                emailTextField.isHidden = true
                 firstNameLabel.isHidden = true
                 lastNameLabel.isHidden = true
-                emailLabel.isHidden = true
                 deadlineDatePicker.isHidden = true
                 deadLineLabel.isHidden = true
                 
@@ -65,26 +60,91 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate {
         }
     }
     
-    private var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
-        return formatter
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         self.setupViews()
+        if AuthorizationToken.getAppToken().0 == nil {
+            authenticationOverlay.backgroundColor = .clear
+            authenticationOverlay.isHidden = true
+        } else {
+            authenticationOverlay.backgroundColor = .white
+            authenticationOverlay.isHidden = false
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        let applicationToken = AuthorizationToken.getAppToken()
+        
+        guard
+            let _ = applicationToken.0,
+            let username = applicationToken.2,
+            let password = applicationToken.3
+        else {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.authenticationOverlay.backgroundColor = .clear
+            })
+            self.authenticationOverlay.isHidden = true
+            return
+        }
+        
+        let userCredentials = [
+            RequestKeys.username.rawValue: username,
+            RequestKeys.password.rawValue: password
+        ]
+        
+        RequestSingleton.loginUser(requestBody: userCredentials) { (model) in
+            guard let viewModel = model else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.authenticationOverlay.backgroundColor = .clear
+                })
+                self.authenticationOverlay.isHidden = true
+                AuthorizationToken.clearAppToken()
+                return
+            }
+            
+            self.segueToHomeViewController(model: viewModel)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupPickers()
+        self.setupKeyboard()
+        self.setupSwipe()
+    }
+    
+    private func setupKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func setupSwipe() {
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeDown.direction = UISwipeGestureRecognizer.Direction.down
+        self.authenticationOverlay.addGestureRecognizer(swipeDown)
+        self.view.addGestureRecognizer(swipeDown)
+    }
+    
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if self.view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= self.view.frame.height > 690 ? 130 : 105
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
     
     private func setupViews() {
         usernameTextfield.addShadow(width: 0.2)
         firstNameTextfield.addShadow(width: 0.2)
         lastNameTextField.addShadow(width: 0.2)
-        emailTextField.addShadow(width: 0.2)
         passwordTextField.addShadow(width: 0.2)
         isRegisteringView = false
     }
@@ -103,63 +163,64 @@ class AuthenticationViewController: UIViewController, UIPickerViewDelegate {
     }
     
     private func registerUser() {
-//        guard
-//            let firstName = self.firstNameTextfield.text, !firstName.isEmpty,
-//            let lastName = self.lastNameTextField.text, !lastName.isEmpty,
-//            let email = self.emailTextField.text, !email.isEmpty,
-//            let username = self.usernameTextfield.text, !username.isEmpty,
-//            let password = self.passwordTextField.text, !password.isEmpty
-//            else {
-//                return
-//        }
-//
-//        let deadlineDate = self.deadlineDatePicker.date
-//        let requestBody = [
-//            RequestKeys.firstName.rawValue: firstName,
-//            RequestKeys.lastName.rawValue: lastName,
-//            RequestKeys.username.rawValue: username,
-//            RequestKeys.password.rawValue: password,
-//            RequestKeys.email.rawValue: email,
-//            RequestKeys.deadline.rawValue: dateFormatter.string(from: deadlineDate)
-//        ]
+        guard
+            let firstName = self.firstNameTextfield.text, !firstName.isEmpty,
+            let lastName = self.lastNameTextField.text, !lastName.isEmpty,
+            let username = self.usernameTextfield.text, !username.isEmpty,
+            let password = self.passwordTextField.text, !password.isEmpty
+            else {
+                return
+        }
+
+        let deadlineDate = self.deadlineDatePicker.date
+        let requestBody = [
+            RequestKeys.firstName.rawValue: firstName,
+            RequestKeys.lastName.rawValue: lastName,
+            RequestKeys.username.rawValue: username,
+            RequestKeys.password.rawValue: password,
+            RequestKeys.deadline.rawValue: DeadlineFormatter.global.string(from: deadlineDate)
+        ]
         
-//        print("register", requestBody)
-        RequestSingleton.registerUser(requestBody: [:]) { (viewModel) in
-            if let notesViewModel = viewModel {
-                self.segueToHomeViewController(model: notesViewModel)
+        RequestSingleton.registerUser(requestBody: requestBody) { (viewModel) in
+            if let model = viewModel {
+                self.segueToHomeViewController(model: model)
             }
         }
     }
     
     private func loginUser() {
-//        guard
-//            let username = self.usernameTextfield.text, !username.isEmpty,
-//            let password = self.passwordTextField.text, !password.isEmpty
-//            else {
-//                return
-//        }
-//
-//        let requestBody = [
-//            RequestKeys.username.rawValue: username,
-//            RequestKeys.password.rawValue: password
-//        ]
-//
-//        print("login", requestBody)
-        RequestSingleton.loginUser(requestBudy: [:]) { (viewModel) in
-            if let notesViewModel = viewModel {
-                self.segueToHomeViewController(model: notesViewModel)
+        guard
+            let username = self.usernameTextfield.text, !username.isEmpty,
+            let password = self.passwordTextField.text, !password.isEmpty
+            else {
+                return
+        }
+
+        let requestBody = [
+            RequestKeys.username.rawValue: username,
+            RequestKeys.password.rawValue: password
+        ]
+
+        RequestSingleton.loginUser(requestBody: requestBody) { (viewModel) in
+            if let model = viewModel {
+                self.segueToHomeViewController(model: model)
             }
         }
     }
     
-    private func segueToHomeViewController(model: [NoteViewModel]) {
+    private func segueToHomeViewController(model: RequestSingleton.UserModel) {
         guard let controlTabViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: ControlTabViewController.identifier) as? ControlTabViewController else {
             return
         }
         
         controlTabViewController.viewControllers?.forEach({ (viewController) in
             if let homeViewController = viewController as? HomeViewController {
-                homeViewController.viewModels = model
+                homeViewController.viewModels = model.notes
+            }
+            if let settingsViewController = viewController as? SettingsViewController {
+                if let date = DeadlineFormatter.utc.date(from: model.deadline) {
+                    settingsViewController.currentDeadline = date
+                }
             }
         })
         

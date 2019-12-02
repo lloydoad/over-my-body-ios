@@ -7,16 +7,41 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var areNotificationsAllowed: Bool = false
+    
+    let notificationCenter = UNUserNotificationCenter.current()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        AuthorizationToken.establishAuthorization()
+        setupNotifications()
         return true
+    }
+    
+    func setupNotifications() {
+        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+        notificationCenter.requestAuthorization(options: options) { (didAllow, error) in
+            guard didAllow else {
+                print("permission denied")
+                return
+            }
+            
+            if error != nil {
+                print("internal error")
+                return
+            }
+            
+            self.notificationCenter.getNotificationSettings(completionHandler: { (settings) in
+                if settings.authorizationStatus == .authorized {
+                    self.areNotificationsAllowed = true
+                }
+            })
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

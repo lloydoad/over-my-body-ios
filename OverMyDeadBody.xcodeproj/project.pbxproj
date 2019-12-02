@@ -12,12 +12,15 @@
 		4C0BD5A5237BB0D200B8E678 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0BD5A4237BB0D200B8E678 /* NotesViewModel.swift */; };
 		4C0BD5A7237BC41A00B8E678 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0BD5A6237BC41A00B8E678 /* ContactsTableViewCell.swift */; };
 		4C2051842373A267002A8D8A /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2051832373A267002A8D8A /* NoteViewController.swift */; };
+		4C34527323923D2B008A1DED /* AuthorizationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C34527223923D2B008A1DED /* AuthorizationToken.swift */; };
+		4C3452752392C891008A1DED /* DeadlineNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3452742392C891008A1DED /* DeadlineNotifications.swift */; };
 		4C5F12F7236E7502003012A2 /* ControlTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F12F6236E7502003012A2 /* ControlTabViewController.swift */; };
 		4C6F046A2390AE3500780785 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F04692390AE3500780785 /* Contacts.swift */; };
 		4C7A4D6F237F05CE009C8D53 /* RequestSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A4D6E237F05CE009C8D53 /* RequestSingleton.swift */; };
 		4C7A4D71237F0CE4009C8D53 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A4D70237F0CE4009C8D53 /* DummyData.swift */; };
 		4C7A4D76237F0D2D009C8D53 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A4D75237F0D2D009C8D53 /* NoteModel.swift */; };
-		4CB7438B238DD3A00072AFDA /* OptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7438A238DD3A00072AFDA /* OptionsTableViewController.swift */; };
+		4CB3BCDF2394B9730047970F /* DeadlineFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3BCDE2394B9730047970F /* DeadlineFormatter.swift */; };
+		4CB7438B238DD3A00072AFDA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7438A238DD3A00072AFDA /* SettingsViewController.swift */; };
 		4CD83E0A236F24A000340F6E /* NotePreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD83E09236F24A000340F6E /* NotePreviewTableViewCell.swift */; };
 		4CE9266A2367AF70003E73AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE926692367AF70003E73AF /* AppDelegate.swift */; };
 		4CE9266C2367AF70003E73AF /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE9266B2367AF70003E73AF /* AuthenticationViewController.swift */; };
@@ -54,12 +57,15 @@
 		4C0BD5A4237BB0D200B8E678 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 		4C0BD5A6237BC41A00B8E678 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		4C2051832373A267002A8D8A /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		4C34527223923D2B008A1DED /* AuthorizationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationToken.swift; sourceTree = "<group>"; };
+		4C3452742392C891008A1DED /* DeadlineNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineNotifications.swift; sourceTree = "<group>"; };
 		4C5F12F6236E7502003012A2 /* ControlTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlTabViewController.swift; sourceTree = "<group>"; };
 		4C6F04692390AE3500780785 /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		4C7A4D6E237F05CE009C8D53 /* RequestSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSingleton.swift; sourceTree = "<group>"; };
 		4C7A4D70237F0CE4009C8D53 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		4C7A4D75237F0D2D009C8D53 /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
-		4CB7438A238DD3A00072AFDA /* OptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewController.swift; sourceTree = "<group>"; };
+		4CB3BCDE2394B9730047970F /* DeadlineFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineFormatter.swift; sourceTree = "<group>"; };
+		4CB7438A238DD3A00072AFDA /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4CD83E09236F24A000340F6E /* NotePreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewTableViewCell.swift; sourceTree = "<group>"; };
 		4CE926662367AF70003E73AF /* OverMyDeadBody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OverMyDeadBody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CE926692367AF70003E73AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +212,9 @@
 			isa = PBXGroup;
 			children = (
 				4C6F04692390AE3500780785 /* Contacts.swift */,
+				4C34527223923D2B008A1DED /* AuthorizationToken.swift */,
+				4C3452742392C891008A1DED /* DeadlineNotifications.swift */,
+				4CB3BCDE2394B9730047970F /* DeadlineFormatter.swift */,
 				4CE926992367B52D003E73AF /* ViewExtension.swift */,
 				4CE9269B2367B560003E73AF /* Colors.swift */,
 			);
@@ -221,7 +230,7 @@
 				4C2051832373A267002A8D8A /* NoteViewController.swift */,
 				4C0BD5A0237BA4EC00B8E678 /* ContactsViewController.swift */,
 				4C0BD5A2237BADD500B8E678 /* NewContactViewController.swift */,
-				4CB7438A238DD3A00072AFDA /* OptionsTableViewController.swift */,
+				4CB7438A238DD3A00072AFDA /* SettingsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -357,7 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CB7438B238DD3A00072AFDA /* OptionsTableViewController.swift in Sources */,
+				4CB7438B238DD3A00072AFDA /* SettingsViewController.swift in Sources */,
 				4C0BD5A7237BC41A00B8E678 /* ContactsTableViewCell.swift in Sources */,
 				4CE9269F2367BA1B003E73AF /* HomeViewController.swift in Sources */,
 				4C0BD5A1237BA4EC00B8E678 /* ContactsViewController.swift in Sources */,
@@ -365,8 +374,11 @@
 				4C0BD5A5237BB0D200B8E678 /* NotesViewModel.swift in Sources */,
 				4CE9269C2367B560003E73AF /* Colors.swift in Sources */,
 				4CE9266C2367AF70003E73AF /* AuthenticationViewController.swift in Sources */,
+				4C3452752392C891008A1DED /* DeadlineNotifications.swift in Sources */,
 				4C7A4D76237F0D2D009C8D53 /* NoteModel.swift in Sources */,
+				4C34527323923D2B008A1DED /* AuthorizationToken.swift in Sources */,
 				4CD83E0A236F24A000340F6E /* NotePreviewTableViewCell.swift in Sources */,
+				4CB3BCDF2394B9730047970F /* DeadlineFormatter.swift in Sources */,
 				4C6F046A2390AE3500780785 /* Contacts.swift in Sources */,
 				4CE9266A2367AF70003E73AF /* AppDelegate.swift in Sources */,
 				4C2051842373A267002A8D8A /* NoteViewController.swift in Sources */,

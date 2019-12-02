@@ -46,7 +46,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
         self.contactsTableView.dataSource = self
     }
     
-    private func fetchContacts() {
+    internal func fetchContacts() {
         Contacts.getContacts { (emails) in
             DispatchQueue.main.async {
                 var allEmails = emails
@@ -67,10 +67,12 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func updateRecipientsButton() {
-        self.addNewEmailButton.layer.borderColor = UIColor.darkGray.cgColor
-        self.addNewEmailButton.layer.borderWidth = 0.5
-        self.addNewEmailButton.layer.cornerRadius = 8
-        self.addNewEmailButton.setTitleColor(.black, for: .highlighted)
+        if self.addNewEmailButton != nil {
+            self.addNewEmailButton.layer.borderColor = UIColor.darkGray.cgColor
+            self.addNewEmailButton.layer.borderWidth = 0.5
+            self.addNewEmailButton.layer.cornerRadius = 8
+            self.addNewEmailButton.setTitleColor(.black, for: .highlighted)
+        }
     }
     
     private func updateTopBarView() {
@@ -127,6 +129,16 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         self.contactsTableView.reloadData()
+    }
+    
+    @IBAction func addNewEmailButtonClicked(_ sender: Any) {
+        guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: NewContactViewController.identifier) as? NewContactViewController else {
+            return
+        }
+        
+        viewController.contactsViewController = self
+        viewController.modalPresentationStyle = .overCurrentContext
+        self.present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {

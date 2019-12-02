@@ -12,12 +12,12 @@ public struct NoteModel: Codable {
     var _id: String
     var subject: String
     var recipients: [String]
-    var body: String
+    var noteBody: String
     
     public init(_id: String, subject: String, recipients: [String], body: String) {
         self._id = _id
         self.subject = subject
         self.recipients = recipients
-        self.body = body
+        self.noteBody = body
     }
 }

@@ -18,7 +18,7 @@ public struct NoteViewModel {
     
     public init(model: NoteModel) {
         self.id = model._id
-        self.body = model.body
+        self.body = model.noteBody
         self.subject = model.subject
         self.recipients = model.recipients
     }

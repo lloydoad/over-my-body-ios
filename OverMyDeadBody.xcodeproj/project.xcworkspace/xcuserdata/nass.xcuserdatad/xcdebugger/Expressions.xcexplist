@@ -3,10 +3,29 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in closure #1 in static RequestSingleton.loginUser(requestBody:completion:):RequestSingleton.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "AuthorizationToken">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ViewController.prepare(for:sender:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "nextViewController.nextViewControllers">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AuthenticationViewController.keyboardWillShow(notification:):AuthenticationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view.frame.origin.y">
+            </PersistentString>
+            <PersistentString
+               value = "self.view.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

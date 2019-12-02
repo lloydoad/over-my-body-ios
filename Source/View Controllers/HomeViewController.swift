@@ -40,6 +40,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return viewModels.count
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard indexPath.row < viewModels.count else {
+            return
+        }
+        
+        if editingStyle == .delete {
+            removeNote(self.viewModels[indexPath.row], at: indexPath)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: NoteViewController.identifier) as? NoteViewController else {
             return
@@ -67,5 +77,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let note = self.viewModels[indexPath.row]
         cell.model = note
         return cell
+    }
+    
+    private func removeNote(_ note: NoteViewModel, at indexPath: IndexPath) {
+        RequestSingleton.deleteNote(note: note) { (didSucceed) in
+            DispatchQueue.main.async {
+                guard didSucceed else {
+                    return
+                }
+                
+                self.viewModels.remove(at: indexPath.row)
+                self.previewNotesTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
     }
 }

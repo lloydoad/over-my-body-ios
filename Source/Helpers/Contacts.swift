@@ -37,4 +37,38 @@ public class Contacts {
             completion(emails)
         }
     }
+    
+    public static func saveContact(email: String, completion: @escaping (Bool) -> ()) {
+        let store = CNContactStore()
+        store.requestAccess(for: .contacts) { (accessGranted, error) in
+            if let err = error {
+                print(err)
+                completion(false)
+                return
+            }
+            
+            guard accessGranted else {
+                print("Access Denied")
+                completion(false)
+                return
+            }
+            
+            let newContact = CNMutableContact()
+            newContact.emailAddresses = [CNLabeledValue<NSString>(label: email, value: email as NSString)]
+            
+            let saveRequest = CNSaveRequest()
+            saveRequest.add(newContact, toContainerWithIdentifier:nil)
+            
+            do {
+                try store.execute(saveRequest)
+                completion(true)
+            } catch let error {
+                print(error)
+                completion(false)
+            }
+            
+            completion(true)
+            return
+        }
+    }
 }

@@ -13,6 +13,9 @@ class NewContactViewController: UIViewController {
     @IBOutlet weak var mailTextField: UITextField!
     @IBOutlet weak var topBarView: UIView!
     
+    public static let identifier: String = "NewContactViewController"
+    weak var contactsViewController: ContactsViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateTopBarView()
@@ -24,25 +27,6 @@ class NewContactViewController: UIViewController {
         self.topBarView.layer.borderColor = UIColor.darkGray.cgColor
     }
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        
-        removeWarnings()
-        guard identifier == "saveIdentifier" else {
-            return true
-        }
-        
-        guard let mail = mailTextField.text else {
-            return false
-        }
-        
-        guard !mail.isEmpty else {
-            addWarningTo(mailTextField)
-            return false
-        }
-        
-        return true
-    }
-    
     private func addWarningTo(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.red.cgColor
         textField.layer.borderWidth = 0.5
@@ -50,5 +34,34 @@ class NewContactViewController: UIViewController {
     
     private func removeWarnings() {
         mailTextField.layer.borderColor = UIColor.clear.cgColor
+    }
+    
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        removeWarnings()
+        
+        guard let mail = mailTextField.text, !mail.isEmpty else {
+            addWarningTo(mailTextField)
+            return
+        }
+        
+        Contacts.saveContact(email: mail) { (didSave) in
+            DispatchQueue.main.async {
+                if didSave {
+                    self.contactsViewController?.fetchContacts()
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    if let viewController = self.contactsViewController, !viewController.allEmails.contains(mail) {
+                        viewController.allEmails.append(mail)
+                        viewController.displayedEmails.append(mail)
+                        viewController.contactsTableView.reloadData()
+                    }
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
     }
 }

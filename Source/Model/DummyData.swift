@@ -43,3 +43,5 @@ let DUMMY_REQUEST_DATA: [NoteModel] = [
         body: DUMMY_NOTE_BODY
     )
 ]
+
+let DUMMY_AUTHORIZATION_KEY: String = "yeetOrYeet"
